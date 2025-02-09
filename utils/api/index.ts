@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-// const baseURL = 'http://127.0.0.1:3000/api/';
-const baseURL = 'https://ecommerce-full-stack-nine.vercel.app/api/';
+const baseURL = 'http://127.0.0.1:3000/api/';
+// const baseURL = 'https://ecommerce-full-stack-nine.vercel.app/api/';
  
  
 export interface ApiResponse<T = any> {

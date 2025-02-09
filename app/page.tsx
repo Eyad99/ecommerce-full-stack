@@ -6,7 +6,6 @@
 export default async function Home() {
 	// const productsData = await productApi.products();
 	// console.log('productsData,productsData', productsData);
-
 	return (
 		<>test</>
 		// <Suspense fallback={'loading'}>
