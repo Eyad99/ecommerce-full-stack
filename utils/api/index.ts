@@ -1,5 +1,7 @@
-const baseURL = 'http://127.0.0.1:3000/api/';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
+// const baseURL = 'http://127.0.0.1:3000/api/';
+const baseURL = 'https://ecommerce-full-stack-nine.vercel.app/api/';
  
  
 export interface ApiResponse<T = any> {
@@ -37,17 +39,34 @@ const responseInterceptor = async (response: any): Promise<any> => {
 
 // Helper function for making API requests
 const apiRequest = async (url: string, config: RequestInit = {}): Promise<any> => {
-	const finalConfig = requestInterceptor({
-		...config,
-		headers: {
+	// const finalConfig = requestInterceptor({
+	// 	...config,
+	// 	headers: {
+	// 		Accept: 'application/json',
+	// 		'Content-Type': 'application/json',
+	// 		...config.headers,
+	// 	},
+	// });
+
+	// const response = await fetch(`${baseURL}${url}`, finalConfig);
+	// return responseInterceptor(response as any);
+
+	try {
+		const finalConfig = requestInterceptor({
+		  ...config,
+		  headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
 			...config.headers,
-		},
-	});
-
-	const response = await fetch(`${baseURL}${url}`, finalConfig);
-	return responseInterceptor(response as any);
+		  },
+		});
+	
+		const response = await fetch(`${baseURL}${url}`, finalConfig);
+		return responseInterceptor(response as any);
+	  } catch (error) {
+		console.error("API Request failed:", error);
+		return { data: null, statusCode: 500, message: "Internal Server Error" };
+	  }
 };
 
 // CRUD methods
