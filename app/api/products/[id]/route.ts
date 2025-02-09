@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server';
 import { createConnection } from '@/lib/db';
 
-export async function GET({ params }: { params: { id: string } }) {
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
+	const { id } = await params;
+
 	try {
 		const db = await createConnection();
-		const [product] = await db.query('SELECT * FROM products WHERE id = ?', [params.id]);
+		const [product] = await db.query('SELECT * FROM products WHERE id = ?', [id]);
 		if (product.length === 0) {
 			return NextResponse.json({ error: 'Product not found' }, { status: 404 });
 		}
@@ -17,7 +19,9 @@ export async function GET({ params }: { params: { id: string } }) {
 	}
 }
 
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
+export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
+	const { id } = await params;
+
 	try {
 		const db = await createConnection();
 		const body = await request.json();
@@ -28,7 +32,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 		}
 
 		const sql = 'UPDATE products SET name = ?, price = ? WHERE id = ?';
-		const [result] = await db.query(sql, [name, price, params.id]);
+		const [result] = await db.query(sql, [name, price, id]);
 
 		if (result.affectedRows === 0) {
 			return NextResponse.json({ error: 'Product not found' }, { status: 404 });
@@ -40,11 +44,12 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 	}
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
+	const { id } = await params;
 	try {
 		const db = await createConnection();
 		const sql = 'DELETE FROM products WHERE id = ?';
-		const [result] = await db.query(sql, [params.id]);
+		const [result] = await db.query(sql, [id]);
 
 		if (result.affectedRows === 0) {
 			return NextResponse.json({ error: 'Product not found' }, { status: 404 });
