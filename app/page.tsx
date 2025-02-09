@@ -1,5 +1,4 @@
 import { productApi } from '@/core/services/product';
-import { Suspense } from 'react';
 
 export default async function Home() {
 	const productsData = await productApi.products();

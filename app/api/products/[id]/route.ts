@@ -1,4 +1,4 @@
-import { NextResponse, NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 import { createConnection } from '@/lib/db';
 
 export async function GET({ params }: { params: { id: string } }) {
