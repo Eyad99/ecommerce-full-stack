@@ -5,10 +5,11 @@
 
 export default async function Home() {
 	// const productsData = await productApi.products();
-	// console.log('productsData,productsData', productsData);
+	// console.log('products12', productsData);
+
 	return (
 		<>test</>
-		// <Suspense fallback={'loading'}>
+		// <Suspense fallback='loadin'>
 		// 	{productsData?.data?.map((product: any) => (
 		// 		<h6 key={product.id}>{product.name}</h6>
 		// 	))}

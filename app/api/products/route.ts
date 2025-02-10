@@ -1,12 +1,15 @@
 import { NextResponse } from 'next/server';
 import { createConnection } from '@/lib/db';
+import { neon } from '@neondatabase/serverless';
 
 export async function GET() {
 	try {
-		const db = await createConnection();
-		const sql = 'SELECT * FROM products';
-		const [products] = await db.query(sql);
-		return NextResponse.json(products);
+		// const db = await createConnection();
+		// const sql = 'SELECT * FROM products';
+		// const [products] = await db.query(sql);
+		const sql = neon(process.env.DATABASE_URL as string);
+		const products = await sql `SELECT * FROM products`;
+ 		return NextResponse.json({ data: products, statusCode: 200, message: "Success" });
 	} catch (err) {
 		const response = {
 			error: (err as Error).message,
