@@ -8,7 +8,7 @@ export default async function Home() {
 	// console.log('products12', productsData);
 
 	return (
-		<>test</>
+		<>test 1</>
 		// <Suspense fallback='loadin'>
 		// 	{productsData?.data?.map((product: any) => (
 		// 		<h6 key={product.id}>{product.name}</h6>
