@@ -4,6 +4,7 @@ import { neon } from '@neondatabase/serverless';
 export const dynamic = 'force-dynamic'; // Force dynamic rendering
 const databaseUrl = process.env.DATABASE_URL as string;
 
+// curl -X POST http://localost:3000/api/	
 export async function GET() {
 	try {
 		const sql = neon(databaseUrl);

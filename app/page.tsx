@@ -6,7 +6,6 @@ export const dynamic = 'force-dynamic'; // Force dynamic rendering
 
 export default async function Home() {
 	const productsData = await productApi.products();
-	console.log('products12', productsData);
 
 	return (
 		<Suspense fallback='loadin'>
