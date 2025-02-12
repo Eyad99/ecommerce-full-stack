@@ -1,13 +1,21 @@
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '../ui/dropdown-menu';
-import { Avatar, AvatarImage } from '../ui/avatar';
-import { SignIn, SignOut } from './auth-component';
-import { Button } from '../ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '../../ui/dropdown-menu';
+import { Avatar, AvatarImage } from '../../ui/avatar';
+import { Button } from '../../ui/button';
 import { auth } from '@/auth';
+import SignOut from '../../pages/auth/sign-out';
+import Link from 'next/link';
 
 export default async function UserButton() {
 	const session = await auth();
 
-	if (!session?.user) return <SignIn />;
+	if (!session?.user)
+		return (
+			<Link href={'/sign-in'} passHref>
+				<Button variant={'outline'} size={'sm'}>
+					Sign In
+				</Button>
+			</Link>
+		);
 	return (
 		<div className='flex items-center gap-2'>
 			<span className='hidden text-sm sm:inline-flex'>{session.user.email}</span>

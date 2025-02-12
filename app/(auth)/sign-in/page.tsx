@@ -1,16 +1,8 @@
-// import UserButton from '@/components/reusable/user-button';
-import { auth } from '@/auth';
-import UserButton from '@/components/reusable/user-button';
+import SignIn from '@/components/pages/auth/sign-in';
 import React from 'react';
 
-const SignIn = async () => {
-	const session = await auth();
-	console.log('sessionsession', session);
-	return (
-		<div>
-			<UserButton />
-		</div>
-	);
+const page = () => {
+	return <SignIn />;
 };
 
-export default SignIn;
+export default page;
