@@ -5,7 +5,7 @@ const mysql = require('mysql2/promise');
 const testDBConnection = async () => {
 	try {
 		const connection = await mysql.createConnection({
-			host: '68.65.122.60', // Replace with your actual MySQL host
+			host: 'eyad.godev.app', // Replace with your actual MySQL host
 			user: 'godezazd_ecommerce',
 			password: 'ecommerce52125125',
 			database: 'godezazd_ecommerce',

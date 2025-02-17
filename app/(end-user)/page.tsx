@@ -2,11 +2,11 @@
 
 import { productApi } from '@/core/services/product';
 import { Suspense } from 'react';
-// export const dynamic = 'force-dynamic'; // Force dynamic rendering
 
 export default async function Home() {
 	const productsData = await productApi.products();
 
+	console.log('productsData1', productsData);
 	return (
 		<Suspense fallback='loadin'>
 			{productsData?.data?.map((product: any) => (
