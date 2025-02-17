@@ -1,0 +1,1 @@
+ALTER TABLE `products` ADD `price` varchar(256);
