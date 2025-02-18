@@ -10,7 +10,7 @@ export default async function UserButton() {
 
 	if (!session?.user)
 		return (
-			<Link href={'/sign-in'} passHref>
+			<Link href={'/auth/sign-in'} passHref>
 				<Button variant={'outline'} size={'sm'}>
 					Sign In
 				</Button>

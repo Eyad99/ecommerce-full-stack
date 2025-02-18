@@ -6,7 +6,6 @@ import { Suspense } from 'react';
 export default async function Home() {
 	const productsData = await productApi.products();
 
-	console.log('productsData1', productsData);
 	return (
 		<Suspense fallback='loadin'>
 			{productsData?.data?.map((product: any) => (

@@ -15,6 +15,13 @@
       "when": 1739800248338,
       "tag": "0001_peaceful_meteorite",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1739823130640,
+      "tag": "0002_quiet_shadowcat",
+      "breakpoints": true
     }
   ]
 }
