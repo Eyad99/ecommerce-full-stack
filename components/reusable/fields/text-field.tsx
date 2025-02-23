@@ -39,7 +39,7 @@ const TextField: React.FC<React.ComponentProps<'input'> | TextFieldProps> = ({
 		<div>
 			<div className={cn('grid w-full items-center gap-1.5', containerClassName)}>
 				{label && (
-					<Label htmlFor={label} className={cn('ml-1.5 text-[12px] font-bold capitalize text-navy-700 dark:text-white', labeClassName)}>
+					<Label htmlFor={label} className={cn('ml-1.5 text-[12px] font-bold capitalize', labeClassName)}>
 						{label}
 					</Label>
 				)}

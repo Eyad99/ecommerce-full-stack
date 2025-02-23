@@ -9,6 +9,9 @@ import { useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { signInSchema } from './auth-validation';
 
 function SubmitButton() {
 	const { pending } = useFormStatus();
@@ -20,11 +23,32 @@ function SubmitButton() {
 }
 
 const SignIn = () => {
+	const initialValues = { email: '', password: '', role: 'customer' };
+
 	const initialState: FormState = {
 		errors: {},
 	};
 
 	const [state, formAction, isPending] = useActionState(signInAction, initialState);
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		trigger, // To trigger manual validation
+	} = useForm({
+		resolver: zodResolver(signInSchema),
+		defaultValues: initialValues,
+	});
+
+	const onSubmit = async (data: any) => {
+		// Perform client-side validation
+		const result = (await formAction(data)) as any;
+		console.log('resultresultresultresultresult', result);
+		if (result.errors) {
+			// Handle server-side validation errors
+		}
+	};
 
 	return (
 		<section className='flex justify-center items-center h-screen '>
@@ -32,24 +56,24 @@ const SignIn = () => {
 				<CardHeader>
 					<CardTitle>Sign in to your account</CardTitle>
 				</CardHeader>
-				<form action={formAction}>
+				<form onSubmit={handleSubmit(onSubmit)}>
 					<CardContent>
 						<div className='flex flex-col gap-4'>
 							<TextField
-								name='email'
 								placeholder='Email'
 								label='Email'
-								error={state.errors.email ? true : false}
-								helperText={state.errors.email}
+								error={errors.email ? true : false}
+								helperText={errors.email?.message || state.errors.email}
+								{...register('email')}
 							/>
 							<TextField
 								placeholder='Password'
 								label='Password'
-								name='password'
 								type='password'
 								icon={{ position: 'right' }}
-								error={state.errors.password ? true : false}
-								helperText={state.errors.password}
+								error={errors.password ? true : false}
+								helperText={errors.password?.message || state.errors.password}
+								{...register('password')}
 							/>
 							<div className='flex flex-col gap-1.5'>
 								<Label className='ml-1.5 text-[12px] font-bold capitalize'>Role</Label>
